@@ -1,70 +1,107 @@
-## Provisioning
+# SEED: Streaming Energy Consumption and Emissions Dataset
 
-This dataset captures the energy consumption and carbon emissions associated with video encoding workloads executed on AWS EC2 instances. The computations reflect CPU usage, RAM energy, storage energy, and Power Usage Effectiveness (PUE) across multiple global regions. The final emissions are calculated using region-specific Carbon Intensity (CI) values.
+The **Streaming Energy consumption and Emissions Dataset (SEED)** is an open and FAIR-compliant benchmark designed for energy- and carbon-aware video streaming research. It provides segment-level measurements of energy usage and CO₂ emissions across cloud provisioning and end-user consumption stages.
 
+📄 The complete dataset documentation and methodology are described in the paper:  
+**"SEED: Energy and Emission Estimation Dataset for Adaptive Video Streaming"**  [PDF]
 
-## **region-specific PUE:**  
-   - Frankfurt: 1.35
-   - Ireland: 1.11
-   - Paris: 1.04
-   - Northern Virginia: 1.15
+## Dataset Structure
 
-## **regional Carbon Intensity (CI) values:**
-   CI values obtained from [Electricity Maps](https://app.electricitymaps.com/zone/US-MIDA-PJM/72h/hourly) on July 11, 2025, at 2:00 AM (GMT-5).
-   - Frankfurt: 334 gCO₂e/kWh
-   - Ireland: 494 gCO₂e/kWh
-   - Paris: 13 gCO₂e/kWh
-   - Northern Virginia: 472 gCO₂e/kWh
+```bash
+SEED/
+├── README.md
+├── Provisioning_Encoding_Storage.csv
+├── Consumption_Retrieval_Decoding.csv
+└── Consumption_Display.csv
+```
 
+Each CSV file contains detailed energy and emission measurements for over 500 video segments, under various configurations and conditions.
 
-## 📊 Dataset Sources
+---
 
-- **VCD** – Video Complexity Dataset:  https://ftp.itec.aau.at/datasets/video-complexity/.
+## 📚 CSV File Descriptions
+
+### 1. `Provisioning_Encoding_Storage.csv`
+
+Measures server-side energy and emissions during video encoding and storage.
+
+| Column | Description |
+|--------|-------------|
+| `video`, `codec`, `width`, `bitrate [kb/s]` | Video metadata |
+| `instance_type`, `cpu_model` | Cloud instance details |
+| `encoding_duration [s]`, `average_cpu_utilization [%]` | Encoding benchmarks |
+| `cpu_energy [kWh]`, `storage_energy [kWh]` | Energy consumed |
+| `provisioning_energy_<region>_<PUE> [kWh]` | Region-specific PUE-adjusted energy |
+| `emission_<stage>_<region>_<CI> [g]` | CO₂ emissions (see below) |
+
+---
+
+### 2. `Consumption_Retrieval_Decoding.csv`
+
+Captures client-side retrieval (LTE/Ethernet), decoding energy, and emissions.
+
+| Column | Description |
+|--------|-------------|
+| `video`, `codec`, `width`, `bitrate [kb/s]` | Video and encoding parameters |
+| `net`, `userDevice`, `cpu_model` | Network and hardware setup |
+| `decoding_duration [s]`, `average_cpu_utilization [%]` | Decode benchmarks |
+| `energy_decode [Wh]` | Decoding energy |
+| `energy_NIC_<ETH/LTE>_<throughput> [kWh]` | NIC energy at various throughputs |
+| `emission_<NIC>_<region>_<CI> [g]` | CO₂ emissions from network usage |
+
+---
+
+### 3. `Consumption_Display.csv`
+
+Contains display energy consumption data.
+
+| Column | Description |
+|--------|-------------|
+| `video` | Video segment identifier |
+| `display_energy [kWh]` | Energy for rendering the video |
+| `emission_display_<region>_<CI> [g]` | Associated CO₂ emissions |
+
+---
+
+## ⚙️ Benchmark Summary
+
+- **VCD** – Video Complexity Dataset:  https://ftp.itec.aau.at/datasets/video-complexity/
 - **VEED** – Video Encoding Energy and CO₂ Emissions Dataset:  https://github.com/cd-athena/VEED-dataset
+
+- **Codecs**: HEVC and AVC
+- **Resolutions**: From 360p to 2160p
+- **Bitrates**: 145 kb/s to 16800 kb/s
+- **Provisioning**: AWS EC2 instances across Frankfurt, Ireland, Paris, and Northern Virginia
+- **Networking**: LTE dongle and Ethernet at various throughputs (16.7 to 60 Mb/s)
+- **Decoding**: Intel Xeon Gold 5218 on a PC
+- **Display**: LG OLED 4K Monitor (model 27EP950-B)
+
+---
+
+## 🌍 Region-Specific PUE
+
+- **Frankfurt**: 1.35  
+- **Ireland**: 1.11  
+- **Paris**: 1.04  
+- **Northern Virginia**: 1.15
+
+---
+
+## 🏭 Regional Carbon Intensity (CI)
+
+CI values obtained from [Electricity Maps](https://app.electricitymaps.com/zone/US-MIDA-PJM/72h/hourly) on July 11, 2025, at 2:00 AM (GMT-5):
+
+- **Frankfurt**: 334 gCO₂e/kWh  
+- **Ireland**: 494 gCO₂e/kWh  
+- **Paris**: 13 gCO₂e/kWh  
+- **Northern Virginia**: 472 gCO₂e/kWh
 
 ---
 
 ## 💻 Instance Types
 
 Experiments used the following EC2 instance types:
+
 ```
 c5.large, c5.xlarge, c5.2xlarge, c5.9xlarge, m5.2xlarge, r5.2xlarge
 ```
-
----
-
-
-## 🧪 Encoding Configurations
-Codec:
-`libx264`, `libx265`
-
-Encoder preset: `medium`
-
-Adaptive bitrate streaming settings used:
-- 360p (145 kbit/s)
-- 540p (1600 kbit/s)
-- 720p (3400 kbit/s)
-- 1080p (5800 kbit/s)
-- 1440p (8100 kbit/s)
-- 2160p (16800 kbit/s)
-
-
-
-## 📑 SEED Column Descriptions
-
-| **Dataset column name**                                | **Description**                                                                 |
-|--------------------------------------------------------|---------------------------------------------------------------------------------|
-| `video`, `codec`, `width`, `bitrate`                   | Video metadata                                                                  |
-| `instance/device`, `cpu_model`                         | Instance/device info                                                            |
-| `net`                                                  | Network info                                                                    |
-| `<stage>_duration`                                     | Encoding or decoding duration (seconds)                                         |
-| `average_cpu_utilization`                              | CPU utilization (%)                                                             |
-| `encoding_energy`                                      | Energy used for encoding video (kWh)                                            |
-| `storage_energy`                                       | Energy used to store encoded video (kWh)                                        |
-| `provisioning_energy_<region>_<PUE>`                   | Total provisioning energy considering datacenter PUEs (kWh)                     |
-| `decoding_energy`                                      | Energy used for decoding video (kWh)                                            |
-| `retrieval_<NIC>_<bandwidth>_energy`                   | Energy used to retrieve video through NIC (kWh)                                 |
-| `display_energy`                                       | Energy used to display video (kWh)                                              |
-| `emission_<stage>_<region>_<CI>`                       | CO₂ emissions (g)                                                               |
-
-
