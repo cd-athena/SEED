@@ -1,4 +1,3 @@
-# SEED Dataset README
 ## Provisioning
 
 This dataset captures the energy consumption and carbon emissions associated with video encoding workloads executed on AWS EC2 instances. The computations reflect CPU usage, RAM energy, storage energy, and Power Usage Effectiveness (PUE) across multiple global regions. The final emissions are calculated using region-specific Carbon Intensity (CI) values.
