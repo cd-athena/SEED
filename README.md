@@ -10,6 +10,7 @@ The **Streaming Energy consumption and Emissions Dataset (SEED)** is an open and
 ```bash
 SEED/
 ├── README.md
+├── LICENSE
 ├── Provisioning_Encoding_Storage.csv
 ├── Consumption_Retrieval_Decoding.csv
 └── Consumption_Display.csv
