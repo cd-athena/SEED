@@ -1,6 +1,6 @@
 # SEED: Streaming Energy Consumption and Emissions Dataset
 
-The **Streaming Energy consumption and Emissions Dataset (SEED)** is an open and FAIR-compliant benchmark designed for energy- and carbon-aware video streaming research. It provides segment-level measurements of energy usage and CO₂ emissions across cloud provisioning and end-user consumption stages.
+The **Streaming Energy consumption and Emissions Dataset (SEED)** is an open and FAIR-compliant benchmark designed for energy- and carbon-aware video streaming research. It provides segment-level measurements of energy usage and CO₂ emissions across cloud provisioning and end-user consumption stages:encoding, storage, retrieval, decoding, display.
 
 📄 The complete dataset documentation and methodology are described in the paper:  
 **"SEED: Energy and Emission Estimation Dataset for Adaptive Video Streaming"**  [PDF]
