@@ -96,6 +96,8 @@ CI values obtained from [Electricity Maps](https://app.electricitymaps.com/zone/
 - **Ireland**: 494 gCO₂e/kWh  
 - **Paris**: 13 gCO₂e/kWh  
 - **Northern Virginia**: 472 gCO₂e/kWh
+- **Klagenfurt**: 157 gCO₂e/kWh
+
 
 ---
 
