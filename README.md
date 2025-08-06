@@ -45,7 +45,7 @@ Captures client-side retrieval (LTE/Ethernet), decoding energy, and emissions.
 |--------|-------------|
 | `video`, `codec`, `resolution`, `width`, `bitrate [kb/s]` | Video and encoding parameters |
 | `net`, `userDevice`, `cpu_model` | Network and hardware setup |
-| `decoding_duration [s]`, `average_cpu_utilization [%]` | Decode benchmarks |
+| `decoding_duration [s]`, `average_cpu_utilization [%]` | Decodeing benchmarks |
 | `energy_decode [Wh]` | Decoding energy |
 | `energy_NIC_<ETH/LTE>_<throughput> [kWh]` | NIC energy at various throughputs |
 | `emission_<NIC>_<region>_<CI> [g]` | CO₂ emissions from network usage |
