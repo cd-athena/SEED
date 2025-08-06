@@ -28,7 +28,7 @@ Measures server-side energy and emissions during video encoding and storage.
 
 | Column | Description |
 |--------|-------------|
-| `video`, `codec`, `width`, `bitrate [kb/s]` | Video metadata |
+| `video`, `codec`, `resolution`, `width`, `bitrate [kb/s]` | Video metadata |
 | `instance_type`, `cpu_model` | Cloud instance details |
 | `encoding_duration [s]`, `average_cpu_utilization [%]` | Encoding benchmarks |
 | `cpu_energy [kWh]`, `storage_energy [kWh]` | Energy consumed |
@@ -43,7 +43,7 @@ Captures client-side retrieval (LTE/Ethernet), decoding energy, and emissions.
 
 | Column | Description |
 |--------|-------------|
-| `video`, `codec`, `width`, `bitrate [kb/s]` | Video and encoding parameters |
+| `video`, `codec`, `resolution`, `width`, `bitrate [kb/s]` | Video and encoding parameters |
 | `net`, `userDevice`, `cpu_model` | Network and hardware setup |
 | `decoding_duration [s]`, `average_cpu_utilization [%]` | Decode benchmarks |
 | `energy_decode [Wh]` | Decoding energy |
