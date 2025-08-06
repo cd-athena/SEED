@@ -80,7 +80,8 @@ Contains display energy consumption data.
 ---
 
 ## 🌍 Region-Specific PUE
- PUE values obtained from [AWS Cloud] (https://sustainability.aboutamazon.com/products-services/aws-cloud)
+PUE values obtained from [AWS Cloud](https://sustainability.aboutamazon.com/products-services/aws-cloud).
+
 - **Frankfurt**: 1.35  
 - **Ireland**: 1.11  
 - **Paris**: 1.04  
